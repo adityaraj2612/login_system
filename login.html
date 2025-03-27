@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+
+        .login-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            width: 300px;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #1877f2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #166fe5;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm" onsubmit="return validateLogin(event)">
+            <div class="form-group">
+                <label for="username">User ID:</label>
+                <input type="text" id="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        <p id="errorMessage" style="color: red; display: none;">Invalid credentials!</p>
+    </div>
+
+    <script>
+        // Valid credentials (ID/password pairs)
+        const validCredentials = {
+            "Mansi.love": "Adiislove",
+            "Manshu.chuitya": "Ganja",
+            "Broskiforever": "GangGang",
+            "Idlidosashambarchutney": "Ishuyaar",
+            "Lassi": "Coffee",
+            "AmishBKL": "Bhenkebhai"
+        };
+
+        function validateLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (validCredentials[username] === password) {
+                window.location.href = `welcome.html?id=${username}`;
+            } else {
+                document.getElementById('errorMessage').style.display = 'block';
+            }
+            return false;
+        }
+    </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #f0f2f5;
+        }
+
+        .profile-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 4px solid #1877f2;
+        }
+
+        .bio-section {
+            line-height: 1.6;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <div class="profile-header">
+            <img id="userImage" class="profile-image" src="" alt="Profile Picture">
+            <h1 id="welcomeMessage">Welcome!</h1>
+        </div>
+        <div class="bio-section">
+            <p id="userBio">Loading profile information...</p>
+        </div>
+    </div>
+
+    <script>
+        // Get user ID from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const userId = urlParams.get('id');
+
+        // User-specific content with local file paths
+        const userContent = {
+            "Mansi.love": {
+                image: "Images/mansi.jpg",
+                bio: "Love You know what you mean to me and haa i miss you and kuch de nahi paya toh trying this thing ki kaisa banta. I'm saying that i love you and i love you alot. ❤️"
+            },
+            "Manshu.chuitya": {
+                image: "Images/manshu.jpg",
+                bio: "Aur bhai 1st day bus yaad hai na.... 1st day dost bane the apan aur abhi tak saath hai dekh kuch de nahi paaya and roya nahi magar bhai tu important hai baat smjh thik hai...1st day se lekar last day tk ka saath                         samjha kuch zyda bada nahi likhunga qki ye code karne mai bhul gaya sb kch"
+            },
+            "Broskiforever": {
+                image: "Images/broski.jpg",
+                bio: "Gang leader broski yaad hi hoga 1s study group to being the broski for life and haa shaadi mai bula lio thik hai and haa sb sahi hoga don't take tension samjhi. Be always like this thik h na lil bossy bitch ok donr smjhu mai🤝"
+            },
+            "Idlidosashambarchutney": {
+                image: "Images/ishu.jpg",
+                bio: "Sorry Ishu yaar for user id mgr smjh yaar jaisi hai waise hi rahio thik hai na You're the best you know that smjhi. Bus aab jaldi jaldi south mai shaadi kr mai zyda emotional nahi krne wala thik hai. 🥥"
+            },
+            "Lassi": {
+                image: "Images/lassi.jpg",
+                bio: "🥛Lassi mere bhai kya mast insan hai yaar tu jaanta hu mai aur tu sbse best hai. etni bakchodi koi nhi kar skta poore college ki jaan hai tu. 1st year se terese bakchodi karte aaya hu sorry yaar phele ke liye bs aise hi rahio"
+            },
+            "AmishBKL": {
+                image: "Images/amish.jpg",
+                bio: "Bhenke bhai kaisa hai be saale. Aur bta phele toh bada harami smjha tha mujhe aab kya sochta hai. ek chis hmesha yaad rkh teresaath hmesha hu kch v ho jae smjha aise hi aacha bann ke reh zyda gaand masti nahi thik chize sort rkhne ki kosis kar and aisa hi reh"
+            }
+        };
+
+        // Update page content
+        if (userId && userContent[userId]) {
+            document.getElementById('welcomeMessage').textContent = `Welcome, ${userId}!`;
+            document.getElementById('userImage').src = userContent[userId].image;
+            document.getElementById('userBio').textContent = userContent[userId].bio;
+        } else {
+            document.getElementById('welcomeMessage').textContent = "Access Denied!";
+            document.getElementById('userBio').textContent = "Valid credentials required to view this content";
+            document.getElementById('userImage').src = "Images/placeholder.jpg";
+        }
+    </script>
+</body>
+</html>
